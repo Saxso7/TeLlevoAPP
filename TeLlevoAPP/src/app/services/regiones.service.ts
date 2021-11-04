@@ -26,6 +26,9 @@ export class RegionesService {
   getViajes() {
     return this.http.get(this.apiHomeURL);
   }
+  getPost(): Observable<any> {
+    return this.http.get(this.apiHomeURL + '/Viajes/').pipe(retry(3));
+  }
 
   getComuna(): Observable<any> {
     return this.http.get(this.apiHomeURL + '/comunas/').pipe(retry(3));

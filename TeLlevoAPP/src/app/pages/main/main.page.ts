@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -20,6 +21,7 @@ export class MainPage {
     public toastController: ToastController,
     public alertController: AlertController
   ) {
+    this.router.navigate(['main/viaje']);
     this.activeroute.queryParams.subscribe((params) => {
       //utilizamos lamdba
       if (this.router.getCurrentNavigation().extras.state) {
@@ -73,5 +75,10 @@ export class MainPage {
   }
   costo() {
     this.router.navigate(['/splash2']);
+  }
+  segmentChanged($event) {
+    console.log($event);
+    let direccion = $event.detail.value;
+    this.router.navigate(['main/' + direccion]);
   }
 }

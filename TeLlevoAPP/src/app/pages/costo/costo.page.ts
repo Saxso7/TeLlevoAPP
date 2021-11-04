@@ -98,7 +98,7 @@ export class CostoPage {
     );
   }
   costo() {
-    if (this.vehP == 'Si') {
+    if (this.Viaje.VePropio[0] == this.vehP) {
       this.Costo = 1000;
       console.log(this.Costo);
     } else {

@@ -1,0 +1,12 @@
+<ion-content>
+  <ion-card *ngFor="let via of Viaje">
+    <ion-card-header color="primary">
+      <h4>Sede: {{via.Sede.Sede}}</h4>
+    </ion-card-header>
+    <ion-card-content>
+      <h1>Comuna donde va: {{via.Direccion.name}}</h1>
+      <h1>Vehiculo propio: {{via.VePropio.Tiene}}</h1>
+      <h1>Tipo de vehiculo: {{via.VeTipo.Tipo}}</h1>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
