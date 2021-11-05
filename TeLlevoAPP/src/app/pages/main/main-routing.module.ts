@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainPage } from './main.page';
 import { ComponentViajeComponent } from '../../components/component-viaje/component-viaje.component';
 import { ComponentCotizarComponent } from '../../components/component-cotizar/component-cotizar.component';
+import { ComponentMenuComponent } from '../../components/component-menu/component-menu.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'cotizar',
         component: ComponentCotizarComponent,
+      },
+      {
+        path: 'menu',
+        component: ComponentMenuComponent,
       },
     ],
   },

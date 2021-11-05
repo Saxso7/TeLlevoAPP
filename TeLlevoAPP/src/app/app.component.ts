@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     public router: Router
-  ) {
-    this.initializeApp();
-  }
+  ) // eslint-disable-next-line @typescript-eslint/naming-convention
+  {}
 
   initializeApp() {
     this.platform.ready().then(() => {

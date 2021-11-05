@@ -5,7 +5,7 @@
 <ion-content>
   <ion-item>
     <ion-select placeholder="Seleccione una comuna" [(ngModel)]="direccion">
-      <ion-select-option *ngFor="let com of Comuna" [value]="com">{{com.name}}
+      <ion-select-option *ngFor="let com of Comuna" [value]="com">{{com.comuna}}
       </ion-select-option>
     </ion-select>
   </ion-item>
@@ -28,6 +28,6 @@
     </ion-select>
   </ion-item>
 </ion-content>
-<ion-button expand="block" class="primary" (click)="costo()" (click)="crearViaje()">Confirmar Direccion
-</ion-button>
-<ion-button expand="block" class="primary" (click)="Cargar()" (click)="siguiente()">Consultar Precio</ion-button>
+
+<ion-button expand="block" class="primary" (click)="Cargar()" (click)="siguiente()" (click)="guardarViaje()">Consultar
+  Precio</ion-button>

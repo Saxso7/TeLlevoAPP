@@ -16,23 +16,28 @@
     </ion-row>
   </ion-grid>
 </ion-header>
-
 <ion-content>
-  <ion-item>
-    <ion-label class="ion-text-center" color="primary">
-      Usuario {{dato}}
-    </ion-label>
-  </ion-item>
-  <ion-segment (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="viaje">
-      <ion-label>Friends</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="cotizar">
-      <ion-label>Enemies</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-content>
-    <ion-router-outlet></ion-router-outlet>
+    <ion-item>
+      <ion-label class="ion-text-center" color="primary">
+        Usuario {{dato}}
+      </ion-label>
+      <ion-button size="small" (click)="logOut()">Cerrar Sesion</ion-button>
+    </ion-item>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="viaje">
+        <ion-label>Mapa</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="cotizar">
+        <ion-label>Cotizar Viaje</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
   </ion-content>
 </ion-content>
 <ion-button expand="block" class="primary" (click)="costo()">VER COSTOS</ion-button>

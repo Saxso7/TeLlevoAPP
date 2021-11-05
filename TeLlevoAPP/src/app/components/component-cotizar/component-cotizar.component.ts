@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { RegionesService } from '../../services/regiones.service';
+import { Storage } from '@capacitor/storage';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-component-cotizar',
@@ -7,21 +9,17 @@ import { RegionesService } from '../../services/regiones.service';
   styleUrls: ['./component-cotizar.component.scss'],
 })
 export class ComponentCotizarComponent implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  Viaje: any;
-
-  constructor(private api: RegionesService) {}
+  locationss = [];
+  constructor(private storage: StorageService) {}
 
   ngOnInit() {
-    this.getViajes();
-  }
-  ionViewDidLoad() {
-    this.getViajes();
-  }
-  getViajes() {
-    this.api.getPost().subscribe((viaje) => {
-      console.log(viaje);
-      this.Viaje = viaje;
+    this.storage.keys().then((locations) => {
+      this.locationss = locations;
+      console.log(locations);
     });
+  }
+  ionViewDidLoad() {}
+  eliminar(id) {
+    this.storage.removeTravel(id);
   }
 }

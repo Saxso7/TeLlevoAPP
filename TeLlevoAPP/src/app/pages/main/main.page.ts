@@ -6,6 +6,10 @@ import {
   ToastController,
   AlertController,
 } from '@ionic/angular';
+import { Geolocation } from '@capacitor/geolocation';
+import { MapService } from 'src/app/services/map.service';
+import { StorageService } from '../../services/storage.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -13,22 +17,20 @@ import {
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage {
+  locations = [];
   dato: any; //Gereno variable Any(permite todo valor)
   constructor(
     private activeroute: ActivatedRoute,
     private router: Router,
     private menu: MenuController,
     public toastController: ToastController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private storage: StorageService,
+    private map: MapService,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    private auth: AuthService
   ) {
     this.router.navigate(['main/viaje']);
-    this.activeroute.queryParams.subscribe((params) => {
-      //utilizamos lamdba
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.dato = this.router.getCurrentNavigation().extras.state.dato;
-        console.log(this.dato);
-      }
-    });
   }
   toggleMenu() {
     this.menu.open();
@@ -80,5 +82,30 @@ export class MainPage {
     console.log($event);
     let direccion = $event.detail.value;
     this.router.navigate(['main/' + direccion]);
+  }
+  // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
+  ngOnInit() {
+    this.getCurrentPosition();
+    this.storage.keys().then((locations) => {
+      this.locations = locations;
+      console.log(locations);
+    });
+  }
+  async getCurrentPosition() {
+    const obCoords = await Geolocation.getCurrentPosition();
+    const lat = obCoords.coords.latitude;
+    const long = obCoords.coords.longitude;
+    console.log(lat, long);
+    this.map.initMap(lat, long, 'map');
+  }
+  deleteFromArray() {
+    this.locations.pop();
+  }
+  doRefresh() {
+    window.location.reload();
+  }
+  logOut() {
+    this.auth.logout();
+    this.router.navigate(['/home']);
   }
 }

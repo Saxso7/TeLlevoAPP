@@ -1,46 +1,62 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {
+  PreloadAllModules,
+  RouterModule,
+  Routes,
+  CanActivate,
+} from '@angular/router';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'forget',
-    loadChildren: () => import('./pages/forget/forget.module').then( m => m.ForgetPageModule)
+    loadChildren: () =>
+      import('./pages/forget/forget.module').then((m) => m.ForgetPageModule),
   },
   {
     path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
+    loadChildren: () =>
+      import('./pages/main/main.module').then((m) => m.MainPageModule),
+    canActivate: [LoginGuard],
   },
   {
     path: 'splash',
-    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+    loadChildren: () =>
+      import('./pages/splash/splash.module').then((m) => m.SplashPageModule),
   },
   {
     path: 'splash2',
-    loadChildren: () => import('./pages/splash2/splash2.module').then( m => m.Splash2PageModule)
+    loadChildren: () =>
+      import('./pages/splash2/splash2.module').then((m) => m.Splash2PageModule),
+    canActivate: [LoginGuard],
   },
   {
     path: 'costo',
-    loadChildren: () => import('./pages/costo/costo.module').then( m => m.CostoPageModule)
-  }
+    loadChildren: () =>
+      import('./pages/costo/costo.module').then((m) => m.CostoPageModule),
+    canActivate: [LoginGuard],
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

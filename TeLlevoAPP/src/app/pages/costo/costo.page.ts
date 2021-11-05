@@ -6,7 +6,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-import { RegionesService } from 'src/app/services/regiones.service';
+import { StorageService } from '../../services/storage.service';
+import { MapService } from '../../services/map.service';
+import { Geolocation } from '@capacitor/geolocation';
+import { Storage } from '@capacitor/storage';
 
 @Component({
   selector: 'app-costo',
@@ -15,20 +18,22 @@ import { RegionesService } from 'src/app/services/regiones.service';
 })
 export class CostoPage {
   vehP: any;
-  Costo: any;
   tipoVehiculo: any;
   sede: any;
-  Comuna: any = [];
+  Comuna: any = ([] = [
+    { comuna: 'Valparaiso' },
+    { comuna: 'Quillota' },
+    { comuna: 'La Cruz' },
+    { comuna: 'La Calera' },
+    { comuna: 'Viña del Mar' },
+    { comuna: 'Quilpue' },
+    { comuna: 'Viña Alemana' },
+    { comuna: 'Casablanca' },
+    { comuna: 'Limache' },
+  ]);
   direccion: any;
   users: any;
   viajes: any = [];
-  Viaje: any = {
-    Direccion: '',
-    Sede: '',
-    VePropio: '',
-    VeTipo: '',
-    id: null,
-  };
   Vehiculo: any = ([] = [
     { Tipo: 'Auto' },
     { Tipo: 'Tanke de la 2nda guerra' },
@@ -42,34 +47,21 @@ export class CostoPage {
     private router: Router,
     private activeroute: ActivatedRoute,
     private menu: MenuController,
-    private regionService: RegionesService
+    private storage: StorageService,
+    private map: MapService
   ) {
     this.router.navigate(['costo/menu']);
   }
-  ngOnInit(): void {
-    this.getViajes();
-    this.llamarComuna();
-  }
-  llamarComuna() {
-    this.regionService.getComuna().subscribe((comuna) => {
-      console.log(comuna);
-      this.Comuna = comuna;
-    });
-  }
+  ngOnInit(): void {}
   confirmar() {
     let navigationExtras: NavigationExtras = {
       state: { Direccion: this.direccion },
     };
   }
-  getViajes() {
-    this.regionService.getViaje().subscribe((viaje) => {
-      console.log(viaje);
-      this.viajes = viaje;
-    });
-  }
+
   async siguiente() {
     const toast = await this.toastController.create({
-      message: 'El precio de su viaje es de $xxxxx' + this.Costo,
+      message: 'Costo generado',
       duration: 2000,
     });
     toast.present();
@@ -80,30 +72,18 @@ export class CostoPage {
   Cargar() {
     this.router.navigate(['main']);
   }
-  crearViaje() {
-    var post = {
-      Direccion: this.direccion,
-      Sede: this.sede,
-      VePropio: this.vehP,
-      VeTipo: this.tipoVehiculo,
-      id: null,
-    };
-    this.regionService.createViaje(post).subscribe(
-      (success) => {
-        console.log(success);
-      },
-      (error) => {
-        console.log(error);
-      }
+  crearViaje() {}
+  async guardarViaje() {
+    const obCoords = await Geolocation.getCurrentPosition();
+    const lat = obCoords.coords.latitude;
+    const long = obCoords.coords.longitude;
+    this.storage.saveTravel(
+      lat,
+      long,
+      this.sede,
+      this.direccion,
+      this.vehP,
+      this.tipoVehiculo
     );
-  }
-  costo() {
-    if (this.Viaje.VePropio[0] == this.vehP) {
-      this.Costo = 1000;
-      console.log(this.Costo);
-    } else {
-      this.Costo = 0;
-      console.log(this.Costo);
-    }
   }
 }

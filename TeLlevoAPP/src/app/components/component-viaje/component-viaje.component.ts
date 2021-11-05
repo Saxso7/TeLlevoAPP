@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MapService } from '../../services/map.service';
+import { Geolocation } from '@capacitor/geolocation';
+import { StorageService } from '../../services/storage.service';
+import { componentFactoryName } from '@angular/compiler';
 
 @Component({
   selector: 'app-component-viaje',
@@ -6,8 +10,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./component-viaje.component.scss'],
 })
 export class ComponentViajeComponent implements OnInit {
-  constructor() {}
-
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  Viaje: any;
+  locationss = [];
+  locations = [];
+  constructor(private map: MapService, private storage: StorageService) {}
   ngOnInit() {}
+  ionViewDidLoad() {}
   presentAlert() {}
+  eliminarViaje() {}
 }

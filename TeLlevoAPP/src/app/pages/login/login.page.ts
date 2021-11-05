@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable prefer-const */
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   AlertController,
   LoadingController,
   MenuController,
 } from '@ionic/angular';
-import { RegionesService } from '../../services/regiones.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,55 +15,21 @@ import { RegionesService } from '../../services/regiones.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  dato: string;
-  control: FormGroup;
-  isSubmitted = false;
-  Usuarios: any;
+  public email: string;
+  public password: string;
 
   constructor(
     private router: Router,
-    public formBuilder: FormBuilder,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    private api: RegionesService,
-    private menu: MenuController
+    private menu: MenuController,
+    private authService: AuthService
   ) {}
 
-  ngOnInit() {
-    //controla caracteres minimo para validar
-    this.control = this.formBuilder.group({
-      contraseña: ['', [Validators.required, Validators.minLength(6)]],
-    });
-    this.getUsuarios();
-  }
-  //
-  validar() {
-    console.log(this.Usuarios);
-    console.log(this.Usuarios);
-    console.log(this.dato);
-    // eslint-disable-next-line eqeqeq
-    if (this.dato == this.Usuarios) {
-      let navigationExtras: NavigationExtras = {
-        state: { dato: this.dato }, // Al estado le asigno el parametro
-      };
-      console.log(this.dato);
-      this.router.navigate(['/main'], navigationExtras);
-    } else {
-      console.log('Seleccione un usuario correcto');
-    }
-  }
-  main() {
-    let navigationExtras: NavigationExtras = {
-      state: { dato: this.dato }, // Al estado le asigno el parametro
-    };
-    console.log(this.dato);
-    this.router.navigate(['/main'], navigationExtras);
-  }
-  getUsuarios() {
-    this.api.getUsuario().subscribe((usuario) => {
-      console.log(usuario);
-      this.Usuarios = usuario;
-    });
+  ngOnInit() {}
+  loginEmail() {
+    console.log(this.email);
+    this.authService.loginUserEmail(this.email, this.password);
   }
   async presentAlert1() {
     const alert = await this.alertController.create({
@@ -84,7 +49,7 @@ export class LoginPage implements OnInit {
           text: 'CONFIRMAR',
           handler: () => {
             this.cargar();
-            this.main();
+            this.loginEmail();
             console.log('Confirm Okay');
           },
         },

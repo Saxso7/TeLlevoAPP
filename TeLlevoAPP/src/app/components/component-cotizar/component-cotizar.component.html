@@ -1,12 +1,15 @@
 <ion-content>
-  <ion-card *ngFor="let via of Viaje">
-    <ion-card-header color="primary">
-      <h4>Sede: {{via.Sede.Sede}}</h4>
-    </ion-card-header>
-    <ion-card-content>
-      <h1>Comuna donde va: {{via.Direccion.name}}</h1>
-      <h1>Vehiculo propio: {{via.VePropio.Tiene}}</h1>
-      <h1>Tipo de vehiculo: {{via.VeTipo.Tipo}}</h1>
-    </ion-card-content>
-  </ion-card>
+  <ion-list *ngFor="let loc of locationss">
+    <ion-item-sliding>
+      <ion-item>
+        <ion-label>Comuna: {{loc.comuna.comuna}}</ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="eliminar(loc.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

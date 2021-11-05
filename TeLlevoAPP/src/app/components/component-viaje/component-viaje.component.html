@@ -1,10 +1,5 @@
-<ion-card>
-  <ion-card-header>
-    <ion-searchbar showCancelButton="never" placeholder="¿Donde vamos?"></ion-searchbar>
-    <img src="assets/img/mapa.png" alt="" />
-  </ion-card-header>
-
-  <ion-card-content>
-    <ion-button expand="block" class="primary" (click)="presentAlert()">CONFIRMAR</ion-button>
-  </ion-card-content>
-</ion-card>
+<ion-content>
+  <ion-searchbar showCancelButton="never" placeholder="¿Donde vamos?"></ion-searchbar>
+  <div id="map"></div>
+  <ion-button expand="block" class="primary" (click)="eliminarViaje()">CONFIRMAR</ion-button>
+</ion-content>
