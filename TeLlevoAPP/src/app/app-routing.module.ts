@@ -51,6 +51,13 @@ const routes: Routes = [
       import('./pages/costo/costo.module').then((m) => m.CostoPageModule),
     canActivate: [LoginGuard],
   },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./pages/not-found/not-found.module').then(
+        (m) => m.NotFoundPageModule
+      ),
+  },
 ];
 
 @NgModule({

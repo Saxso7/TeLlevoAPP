@@ -10,6 +10,7 @@ import { StorageService } from '../../services/storage.service';
 import { MapService } from '../../services/map.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { Storage } from '@capacitor/storage';
+import { EtcService } from '../../services/etc.service';
 
 @Component({
   selector: 'app-costo',
@@ -20,27 +21,13 @@ export class CostoPage {
   vehP: any;
   tipoVehiculo: any;
   sede: any;
-  Comuna: any = ([] = [
-    { comuna: 'Valparaiso' },
-    { comuna: 'Quillota' },
-    { comuna: 'La Cruz' },
-    { comuna: 'La Calera' },
-    { comuna: 'Viña del Mar' },
-    { comuna: 'Quilpue' },
-    { comuna: 'Viña Alemana' },
-    { comuna: 'Casablanca' },
-    { comuna: 'Limache' },
-  ]);
+  Comuna: any = [];
   direccion: any;
   users: any;
   viajes: any = [];
-  Vehiculo: any = ([] = [
-    { Tipo: 'Auto' },
-    { Tipo: 'Tanke de la 2nda guerra' },
-    { Tipo: 'Camioneta' },
-  ]);
-  Propia: any = ([] = [{ Tiene: 'Si' }, { Tiene: 'No' }]);
-  Sede: any = ([] = [{ Sede: 'Viña del mar' }, { Sede: 'Valparaiso' }]);
+  Vehiculo: any = [];
+  Propia: any = [];
+  Sede: any = [];
 
   constructor(
     public toastController: ToastController,
@@ -48,11 +35,17 @@ export class CostoPage {
     private activeroute: ActivatedRoute,
     private menu: MenuController,
     private storage: StorageService,
-    private map: MapService
+    private map: MapService,
+    private api: EtcService
   ) {
     this.router.navigate(['costo/menu']);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getComunas();
+    this.getSedes();
+    this.getVePropio();
+    this.getVehiculos();
+  }
   confirmar() {
     let navigationExtras: NavigationExtras = {
       state: { Direccion: this.direccion },
@@ -71,6 +64,30 @@ export class CostoPage {
   }
   Cargar() {
     this.router.navigate(['main']);
+  }
+  getComunas() {
+    this.api.getComuna().subscribe((data) => {
+      console.log(data);
+      this.Comuna = data;
+    });
+  }
+  getSedes() {
+    this.api.getSede().subscribe((data) => {
+      console.log(data);
+      this.Sede = data;
+    });
+  }
+  getVePropio() {
+    this.api.getPropio().subscribe((data) => {
+      console.log(data);
+      this.Propia = data;
+    });
+  }
+  getVehiculos() {
+    this.api.getVehiculo().subscribe((data) => {
+      console.log(data);
+      this.Vehiculo = data;
+    });
   }
   crearViaje() {}
   async guardarViaje() {

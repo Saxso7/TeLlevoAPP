@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+  token: any;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   constructor(private Auth: AngularFireAuth, private router: Router) {}
   loginUserEmail(email: string, password: string) {
@@ -23,6 +24,7 @@ export class AuthService {
     this.Auth.signOut()
       .then(() => {
         console.log('Esperamos verte pronto');
+        this.token = null;
       })
       .catch((err) => console.log(err.message));
   }
