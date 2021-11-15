@@ -20,12 +20,7 @@ export class AuthService {
   isAuthenticated() {
     return this.Auth.currentUser !== null;
   }
-  logout() {
-    this.Auth.signOut()
-      .then(() => {
-        console.log('Esperamos verte pronto');
-        this.token = null;
-      })
-      .catch((err) => console.log(err.message));
+  logout(): Promise<any> {
+    return this.Auth.signOut();
   }
 }

@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -8,14 +9,34 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { NavController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
-  canActivate() {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    public Auth: AngularFireAuth,
+    public nacCtrl: NavController
+  ) {}
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.Auth.user.subscribe((user) => {
+        if (user) {
+          resolve(true);
+        } else {
+          this.nacCtrl.navigateRoot(['']);
+          resolve(false);
+        }
+      });
+    });
     // eslint-disable-next-line prefer-const
-    let usertAuth = this.authService.isAuthenticated();
+    /*const usertAuth = this.authService.isAuthenticated();
     if (usertAuth) {
       console.log('Autenticar');
       return true;
@@ -23,6 +44,6 @@ export class LoginGuard implements CanActivate {
       console.log('No entro papa');
       return false;
       this.router.navigate(['main']);
-    }
+    }*/
   }
 }
