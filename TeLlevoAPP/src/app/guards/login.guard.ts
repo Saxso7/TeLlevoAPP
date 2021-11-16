@@ -30,7 +30,7 @@ export class LoginGuard implements CanActivate {
         if (user) {
           resolve(true);
         } else {
-          this.nacCtrl.navigateRoot(['']);
+          this.nacCtrl.navigateRoot(['home']);
           resolve(false);
         }
       });
