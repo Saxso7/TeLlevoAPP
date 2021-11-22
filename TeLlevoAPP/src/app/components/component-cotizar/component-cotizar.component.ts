@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@capacitor/storage';
+import { RoomService } from 'src/app/services/room.service';
 import { StorageService } from '../../services/storage.service';
 
 @Component({
@@ -10,16 +11,21 @@ import { StorageService } from '../../services/storage.service';
 })
 export class ComponentCotizarComponent implements OnInit {
   locationss = [];
-  constructor(private storage: StorageService) {}
+  viajes = [];
+  constructor(private storage: StorageService, private room: RoomService) {}
 
   ngOnInit() {
-    this.storage.keys().then((locations) => {
-      this.locationss = locations;
-      console.log(locations);
-    });
+    this.getViajes();
   }
   ionViewDidLoad() {}
   eliminar(id) {
     this.storage.removeTravel(id);
   }
+  getViajes() {
+    this.room.llamarViajes().subscribe((viaje) => {
+      console.log(viaje);
+      this.viajes = viaje;
+    });
+  }
+  eliminarViaje() {}
 }

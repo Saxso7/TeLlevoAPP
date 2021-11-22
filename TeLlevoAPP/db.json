@@ -45,8 +45,8 @@
   { "nombre": "Valparaiso" }
 ],
  "Propio":[
-   {"Tiene":"si" },
-   {"Tiene": "no" }
+   {"Tiene":"Si" },
+   {"Tiene": "No" }
  ],
  "Vehiculo":[
    { "tipo": "Automovil "},

@@ -23,9 +23,9 @@
   <ion-content>
     <ion-item>
       <ion-label class="ion-text-center" color="primary">
-        Usuario {{dato}}
+        {{usuarios}}
       </ion-label>
-      <ion-button size="small" (click)="logOut()">Cerrar Sesion</ion-button>
+      <ion-icon (click)="logOut()" name="log-out-outline"></ion-icon>
     </ion-item>
     <ion-segment (ionChange)="segmentChanged($event)">
       <ion-segment-button value="viaje">

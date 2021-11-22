@@ -23,4 +23,7 @@ export class AuthService {
   logout(): Promise<any> {
     return this.Auth.signOut();
   }
+  getAuth() {
+    return this.Auth.authState;
+  }
 }

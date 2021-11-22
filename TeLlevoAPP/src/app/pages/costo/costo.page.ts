@@ -11,6 +11,8 @@ import { MapService } from '../../services/map.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { Storage } from '@capacitor/storage';
 import { EtcService } from '../../services/etc.service';
+import { RoomService } from 'src/app/services/room.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-costo',
@@ -23,7 +25,7 @@ export class CostoPage {
   sede: any;
   Comuna: any = [];
   direccion: any;
-  users: any;
+  usuario: any;
   viajes: any = [];
   Vehiculo: any = [];
   Propia: any = [];
@@ -36,7 +38,9 @@ export class CostoPage {
     private menu: MenuController,
     private storage: StorageService,
     private map: MapService,
-    private api: EtcService
+    private api: EtcService,
+    private room: RoomService,
+    private auth: AuthService
   ) {
     this.router.navigate(['costo/menu']);
   }
@@ -45,6 +49,7 @@ export class CostoPage {
     this.getSedes();
     this.getVePropio();
     this.getVehiculos();
+    this.llamarUsuario();
   }
   confirmar() {
     let navigationExtras: NavigationExtras = {
@@ -61,9 +66,6 @@ export class CostoPage {
   }
   toggleMenu() {
     this.menu.open();
-  }
-  Cargar() {
-    this.router.navigate(['main']);
   }
   getComunas() {
     this.api.getComuna().subscribe((data) => {
@@ -89,18 +91,25 @@ export class CostoPage {
       this.Vehiculo = data;
     });
   }
-  crearViaje() {}
-  async guardarViaje() {
-    const obCoords = await Geolocation.getCurrentPosition();
-    const lat = obCoords.coords.latitude;
-    const long = obCoords.coords.longitude;
-    this.storage.saveTravel(
-      lat,
-      long,
-      this.sede,
-      this.direccion,
-      this.vehP,
-      this.tipoVehiculo
-    );
+  creadorViajes() {
+    if (this.direccion !== null && this.sede !== null) {
+      this.room.crearViajes(
+        this.usuario,
+        this.direccion,
+        this.sede,
+        this.tipoVehiculo,
+        this.vehP
+      );
+      this.router.navigate(['main']);
+      this.siguiente();
+    } else {
+      console.log('error');
+    }
+  }
+  llamarUsuario() {
+    this.auth.getAuth().subscribe((usuario) => {
+      this.usuario = usuario.email;
+      console.log(usuario.email);
+    });
   }
 }

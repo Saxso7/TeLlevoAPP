@@ -10,6 +10,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { MapService } from 'src/app/services/map.service';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +19,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MainPage {
   locations = [];
-  dato: any; //Gereno variable Any(permite todo valor)
+  usuarios: any; //Gereno variable Any(permite todo valor)
   constructor(
     private activeroute: ActivatedRoute,
     private router: Router,
@@ -28,7 +29,8 @@ export class MainPage {
     private storage: StorageService,
     private map: MapService,
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    private auth: AuthService
+    private auth: AuthService,
+    private room: RoomService
   ) {
     this.router.navigate(['main/viaje']);
   }
@@ -90,6 +92,7 @@ export class MainPage {
       this.locations = locations;
       console.log(locations);
     });
+    this.getUsuario();
   }
   async getCurrentPosition() {
     const obCoords = await Geolocation.getCurrentPosition();
@@ -107,5 +110,10 @@ export class MainPage {
   logOut() {
     this.auth.logout();
     this.router.navigate(['/home']);
+  }
+  getUsuario() {
+    this.auth.getAuth().subscribe((usuario) => {
+      this.usuarios = usuario.email;
+    });
   }
 }
