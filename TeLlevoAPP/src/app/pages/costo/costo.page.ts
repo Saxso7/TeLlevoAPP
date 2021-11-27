@@ -45,11 +45,11 @@ export class CostoPage {
     this.router.navigate(['costo/menu']);
   }
   ngOnInit(): void {
-    this.getComunas();
-    this.getSedes();
-    this.getVePropio();
-    this.getVehiculos();
     this.llamarUsuario();
+    this.llamarComuna();
+    this.llamarSedes();
+    this.llamarVePropio();
+    this.llamarVeh();
   }
   confirmar() {
     let navigationExtras: NavigationExtras = {
@@ -66,30 +66,6 @@ export class CostoPage {
   }
   toggleMenu() {
     this.menu.open();
-  }
-  getComunas() {
-    this.api.getComuna().subscribe((data) => {
-      console.log(data);
-      this.Comuna = data;
-    });
-  }
-  getSedes() {
-    this.api.getSede().subscribe((data) => {
-      console.log(data);
-      this.Sede = data;
-    });
-  }
-  getVePropio() {
-    this.api.getPropio().subscribe((data) => {
-      console.log(data);
-      this.Propia = data;
-    });
-  }
-  getVehiculos() {
-    this.api.getVehiculo().subscribe((data) => {
-      console.log(data);
-      this.Vehiculo = data;
-    });
   }
   creadorViajes() {
     if (this.direccion !== null && this.sede !== null) {
@@ -110,6 +86,30 @@ export class CostoPage {
     this.auth.getAuth().subscribe((usuario) => {
       this.usuario = usuario.email;
       console.log(usuario.email);
+    });
+  }
+  llamarComuna() {
+    this.room.llamarMenuViajes().subscribe((comuna) => {
+      console.log(comuna);
+      this.Comuna = comuna;
+    });
+  }
+  llamarSedes() {
+    this.room.llamarSede().subscribe((sede) => {
+      console.log(sede);
+      this.Sede = sede;
+    });
+  }
+  llamarVePropio() {
+    this.room.llamarvehPropio().subscribe((veP) => {
+      console.log(veP);
+      this.Propia = veP;
+    });
+  }
+  llamarVeh() {
+    this.room.llamarVehiculos().subscribe((tipoV) => {
+      console.log(tipoV);
+      this.Vehiculo = tipoV;
     });
   }
 }

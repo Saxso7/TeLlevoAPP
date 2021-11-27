@@ -2,8 +2,8 @@
   <ion-list *ngFor="let via of viajes">
     <ion-card>
       <ion-card-subtitle class="ion-text-center">Sede: {{via.sede.nombre}}</ion-card-subtitle>
-      <ion-card-subtitle class="ion-text-center">Destino: {{via.comuna.name}} </ion-card-subtitle>
-      <ion-card-subtitle class="ion-text-center">Vehiculo: {{via.tipoVehiculo.tipo}}
+      <ion-card-subtitle class="ion-text-center">Destino: {{via.comuna.nombre}} </ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center">Vehiculo: {{via.tipoVehiculo.nombre}}
       </ion-card-subtitle>
       <ion-card-subtitle class="ion-text-center">
         Vehiculo Propio: {{via.vehiculoPropio.Tiene}}

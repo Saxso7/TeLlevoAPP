@@ -5,7 +5,7 @@
 <ion-content>
   <ion-item>
     <ion-select placeholder="Seleccione una comuna" [(ngModel)]="direccion">
-      <ion-select-option *ngFor="let com of Comuna" [value]="com">{{com.name}}
+      <ion-select-option *ngFor="let com of Comuna" [value]="com">{{com.nombre}}
       </ion-select-option>
     </ion-select>
   </ion-item>
@@ -23,7 +23,7 @@
   </ion-item>
   <ion-item>
     <ion-select placeholder="Tipo Vehiculo" [(ngModel)]="tipoVehiculo">
-      <ion-select-option *ngFor="let veh of Vehiculo" [value]="veh">{{veh.tipo}}
+      <ion-select-option *ngFor="let veh of Vehiculo" [value]="veh">{{veh.nombre}}
       </ion-select-option>
     </ion-select>
   </ion-item>

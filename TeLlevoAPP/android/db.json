@@ -1,0 +1,57 @@
+{
+ "comunas": [
+        { "name": "Algarrobo" },
+        { "name": "Cabildo" },
+        { "name": "Calera" },
+        { "name": "Calle Larga" },
+        { "name": "Cartagena" },
+        { "name": "Casablanca" },
+        { "name": "Catemu" },
+        { "name": "Conc�n" },
+        { "name": "El Quisco" },
+        { "name": "El Tabo" },
+        { "name": "Hijuelas" },
+        { "name": "Isla de Pascua" },
+        { "name": "Juan Fern�ndez" },
+        { "name": "La Cruz" },
+        { "name": "La Ligua" },
+        { "name": "Limache" },
+        { "name": "Llaillay" },
+        { "name": "Los Andes" },
+        { "name": "Nogales" },
+        { "name": "Olmu�" },
+        { "name": "Panquehue" },
+        { "name": "Papudo" },
+        { "name": "Petorca" },
+        { "name": "Puchuncav�" },
+        { "name": "Putaendo" },
+        { "name": "Quillota" },
+        { "name": "Quilpu�" },
+        { "name": "Quintero" },
+        { "name": "Rinconada" },
+        { "name": "San Antonio" },
+        { "name": "San Esteban" },
+        { "name": "San Felipe" },
+        { "name": "Santa Mar�a" },
+        { "name": "Santo Domingo" },
+        { "name": "Valpara�so" },
+        { "name": "Villa Alemana" },
+        { "name": "Vi�a del Mar" },
+        { "name": "Zapallar" }
+      ]
+,
+  "Sede":[
+  {"nombre":"Viña del mar"},
+  { "nombre": "Valparaiso" }
+],
+ "Propio":[
+   {"Tiene":"Si" },
+   {"Tiene": "No" }
+ ],
+ "Vehiculo":[
+   { "tipo": "Automovil "},
+   { "tipo": "Camioneta "},
+   { "tipo": "Van"}
+ ] 
+
+}
