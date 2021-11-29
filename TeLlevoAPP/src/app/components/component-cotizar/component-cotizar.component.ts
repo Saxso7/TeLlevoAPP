@@ -11,6 +11,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class ComponentCotizarComponent implements OnInit {
   locationss = [];
+  id: any;
   viajes = [];
   constructor(private storage: StorageService, private room: RoomService) {}
 
@@ -18,14 +19,10 @@ export class ComponentCotizarComponent implements OnInit {
     this.getViajes();
   }
   ionViewDidLoad() {}
-  eliminar(id) {
-    this.storage.removeTravel(id);
-  }
   getViajes() {
     this.room.llamarViajes().subscribe((viaje) => {
       console.log(viaje);
       this.viajes = viaje;
     });
   }
-  eliminarViaje() {}
 }

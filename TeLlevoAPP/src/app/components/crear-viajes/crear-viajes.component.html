@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-item>
+    <ion-select placeholder="Seleccione una comuna" [(ngModel)]="direccion">
+      <ion-select-option *ngFor="let com of Comuna" [value]="com">{{com.nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-select placeholder="Seleccione una Sede" [(ngModel)]="sede">
+      <ion-select-option *ngFor="let sed of Sede" [value]="sed">{{sed.nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-select placeholder="Vehiculo Propio" [(ngModel)]="vehP">
+      <ion-select-option *ngFor="let pro of Propia" [value]="pro">{{pro.Tiene}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-select placeholder="Tipo Vehiculo" [(ngModel)]="tipoVehiculo">
+      <ion-select-option *ngFor="let veh of Vehiculo" [value]="veh">{{veh.nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button expand="block" class="primary" (click)="creadorViajes()">Consultar
+    Precio</ion-button>
+</ion-content>

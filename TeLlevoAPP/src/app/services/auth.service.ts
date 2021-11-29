@@ -17,6 +17,14 @@ export class AuthService {
       })
       .catch((err) => console.log(err.message));
   }
+  loginUserEmailConductor(email: string, password: string) {
+    this.Auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        console.log(user.user.email);
+        this.router.navigate(['/main-conductor']);
+      })
+      .catch((err) => console.log(err.message));
+  }
   isAuthenticated() {
     return this.Auth.currentUser !== null;
   }
@@ -25,5 +33,8 @@ export class AuthService {
   }
   getAuth() {
     return this.Auth.authState;
+  }
+  resetPass(email: string) {
+    return this.Auth.sendPasswordResetEmail(email);
   }
 }

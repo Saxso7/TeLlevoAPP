@@ -8,6 +8,7 @@ import {
   MenuController,
 } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
+    public toastController: ToastController,
     public alertController: AlertController,
     public loadingController: LoadingController,
     private menu: MenuController,
@@ -28,8 +30,14 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
   loginEmail() {
-    console.log(this.email);
-    this.authService.loginUserEmail(this.email, this.password);
+    if (this.email == null) {
+      this.siguiente();
+      console.log('error');
+    } else {
+      console.log(this.email);
+      this.authService.loginUserEmail(this.email, this.password);
+      this.bienvenido();
+    }
   }
   async presentAlert1() {
     const alert = await this.alertController.create({
@@ -70,5 +78,25 @@ export class LoginPage implements OnInit {
       spinner: 'crescent',
     });
     await loading.present();
+  }
+  loginConductores() {
+    this.router.navigate(['conductor']);
+  }
+  contrasena() {
+    this.router.navigate(['forget']);
+  }
+  async siguiente() {
+    const toast = await this.toastController.create({
+      message: 'Ingrese un correo valido',
+      duration: 2000,
+    });
+    toast.present();
+  }
+  async bienvenido() {
+    const toast = await this.toastController.create({
+      message: 'Bienvenido ' + this.email,
+      duration: 2000,
+    });
+    toast.present();
   }
 }

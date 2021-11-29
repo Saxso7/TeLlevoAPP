@@ -52,6 +52,21 @@ const routes: Routes = [
     canActivate: [LoginGuard],
   },
   {
+    path: 'conductor',
+    loadChildren: () =>
+      import('./pages/login-conductor/login-conductor.module').then(
+        (m) => m.LoginConductorPageModule
+      ),
+  },
+  {
+    path: 'main-conductor',
+    loadChildren: () =>
+      import('./pages/main-conductor/main-conductor.module').then(
+        (m) => m.MainConductorPageModule
+      ),
+    canActivate: [LoginGuard],
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/not-found/not-found.module').then(

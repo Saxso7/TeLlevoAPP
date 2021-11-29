@@ -4,13 +4,20 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import { AngularFireObject } from '@angular/fire/compat/database';
+import { ToastController } from '@ionic/angular';
+import { ref, update } from 'firebase/database';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomService {
-  eliminarViajes: AngularFireObject<any>;
-  constructor(private database: AngularFirestore) {}
+  viaje = 'Viajes';
+  eliminar: any = [];
+  constructor(
+    private database: AngularFirestore,
+    public toastController: ToastController
+  ) {}
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -23,6 +30,8 @@ export class RoomService {
   DBvehP = this.database.collection('vehPropio');
   // eslint-disable-next-line @typescript-eslint/naming-convention
   DBtipoV = this.database.collection('tipoVehiculo');
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  DBcon = this.database.collection('Conductores');
 
   llamarViajes() {
     return this.DBRef.snapshotChanges().pipe(
@@ -35,18 +44,24 @@ export class RoomService {
     );
   }
   crearViajes(
+    lat: any,
+    long: any,
     nombre: string,
     comuna: string,
     sede: string,
     tipoVehiculo: string,
-    vehiculoPropio: string
+    vehiculoPropio: string,
+    fecha: Date
   ) {
     this.DBRef.add({
+      lat: lat,
+      long: long,
       nombre: nombre,
       comuna: comuna,
       sede: sede,
       tipoVehiculo: tipoVehiculo,
       vehiculoPropio: vehiculoPropio,
+      fecha: fecha,
     })
       .then(() => {
         console.log('Viaje  creado  correctamente');
@@ -89,6 +104,16 @@ export class RoomService {
         tipV.map((tipoVehi) => {
           const veT = tipoVehi.payload.doc.data();
           return veT;
+        })
+      )
+    );
+  }
+  llamarConductore() {
+    return this.DBcon.snapshotChanges().pipe(
+      map((con) =>
+        con.map((conductor) => {
+          const conductores = conductor.payload.doc.data();
+          return conductores;
         })
       )
     );

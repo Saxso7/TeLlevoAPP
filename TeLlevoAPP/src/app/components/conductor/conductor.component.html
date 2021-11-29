@@ -1,0 +1,27 @@
+<ion-content>
+  <ion-item>
+    <ion-select placeholder="Seleccione un conductor" okText="ok" [(ngModel)]="conductor" (ionChange)="getConductor()">
+      <ion-select-option *ngFor="let con of conductores" [value]="con">
+        {{con.Nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-card>
+    <ion-card-subtitle class="ion-text-center">Nombre : {{nombre}} </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Rut : {{rut}} </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Edad : {{edad}} años
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">
+      Vehiculo : {{vehiculo}}
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">
+      Patente : {{patente}}
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">
+      Licencia : Clase {{licencia}}
+    </ion-card-subtitle>
+  </ion-card>
+</ion-content>
+<ion-content>
+
+</ion-content>

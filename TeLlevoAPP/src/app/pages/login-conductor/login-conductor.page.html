@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <img src="assets/img/duoc.jpg">
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="ion-text-center">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password" required="true"></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" class="primary" (click)="loginEmail()">INICIAR SESION
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label position="floating">Ingresa su número telefonico</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="iniciarSesion()">Iniciar</ion-button>
+  </div>
+  <div class="ion-text-center">
+    <ion-col>
+      <ion-button (click)="inicio()">
+        Volver al inicio
+        <ion-icon name="enter-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </div>
+</ion-content>

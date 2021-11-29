@@ -1,17 +1,18 @@
-<img src="assets/img/duoc.jpg" alt=""/>
+<img src="assets/img/duoc.jpg" alt="" />
 <ion-content>
-  <img class="padding-left" src="assets/img/Recuperar.png">
-<ion-item lines="full">
-<ion-label position="floating">NOMBRE USUARIO</ion-label>
-<ion-input placeholder="Usuario"  [(ngModel)]="dato.user" ></ion-input>
-</ion-item>
-  <ion-button expand="block" class="primary" (click)="login()">RECUPERAR</ion-button>
+  <ion-item lines="full">
+    <ion-label position="floating">Ingrese Correo</ion-label>
+    <ion-input placeholder="Ingrese su email" [(ngModel)]="dato.user" [(ngModel)]="email" required="true" name="email">
+    </ion-input>
+  </ion-item>
+  <ion-button expand="block" class="primary" (click)="login()" (click)="resetPass()">Recuperar</ion-button>
   <div class="ion-text-center">
-      <ion-col>
-        <ion-label [routerLink]="['/home']">
-          Volver a inicio</ion-label>
-      </ion-col>
-    </div>
+    <ion-col>
+      <ion-button (click)="inicio()">
+        Volver al inicio
+        <ion-icon name="enter-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </div>
 
 </ion-content>
-

@@ -35,15 +35,5 @@ export class LoginGuard implements CanActivate {
         }
       });
     });
-    // eslint-disable-next-line prefer-const
-    /*const usertAuth = this.authService.isAuthenticated();
-    if (usertAuth) {
-      console.log('Autenticar');
-      return true;
-    } else {
-      console.log('No entro papa');
-      return false;
-      this.router.navigate(['main']);
-    }*/
   }
 }
