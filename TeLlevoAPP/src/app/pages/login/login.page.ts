@@ -30,14 +30,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
   loginEmail() {
-    if (this.email == null) {
-      this.siguiente();
-      console.log('error');
-    } else {
-      console.log(this.email);
-      this.authService.loginUserEmail(this.email, this.password);
-      this.bienvenido();
-    }
+    this.authService.loginUserEmail(this.email, this.password);
   }
   async presentAlert1() {
     const alert = await this.alertController.create({

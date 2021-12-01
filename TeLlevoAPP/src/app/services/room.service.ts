@@ -14,6 +14,7 @@ import { AnonymousSubject } from 'rxjs/internal/Subject';
 export class RoomService {
   viaje = 'Viajes';
   eliminar: any = [];
+  uid: string;
   constructor(
     private database: AngularFirestore,
     public toastController: ToastController
@@ -32,16 +33,41 @@ export class RoomService {
   DBtipoV = this.database.collection('tipoVehiculo');
   // eslint-disable-next-line @typescript-eslint/naming-convention
   DBcon = this.database.collection('Conductores');
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  DBvCon = this.database.collection('ViajeConfirmado');
 
   llamarViajes() {
     return this.DBRef.snapshotChanges().pipe(
+      map((comuna) =>
+        comuna.map((viajes) => {
+          const via = viajes.payload.doc.data();
+          return via;
+        })
+      )
+    );
+  }
+  async llamarAll(colection) {
+    try {
+      return await this.database.collection(colection).snapshotChanges();
+    } catch (error) {
+      console.log('error en:', error);
+    }
+
+    /*return this.DBRef.snapshotChanges().pipe(
       map((usuarios) =>
         usuarios.map((usuario) => {
           const data = usuario.payload.doc.data();
           return data;
         })
       )
-    );
+    );*/
+  }
+  async eliminarAll(colection, id) {
+    try {
+      return await this.database.collection(colection).doc(id).delete();
+    } catch (error) {
+      console.log('error en:', error);
+    }
   }
   crearViajes(
     lat: any,
@@ -62,6 +88,17 @@ export class RoomService {
       tipoVehiculo: tipoVehiculo,
       vehiculoPropio: vehiculoPropio,
       fecha: fecha,
+    })
+      .then(() => {
+        console.log('Viaje  creado  correctamente');
+      })
+      .catch((err) => console.log(err.message));
+  }
+  crearViajeConfirmado(conductor: any, sede: any, km: any) {
+    this.DBvCon.add({
+      conductor: conductor,
+      sede: sede,
+      km: km,
     })
       .then(() => {
         console.log('Viaje  creado  correctamente');
@@ -117,5 +154,8 @@ export class RoomService {
         })
       )
     );
+  }
+  eliminarViaje(collection, id) {
+    this.database.collection(collection).doc(id).delete();
   }
 }

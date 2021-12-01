@@ -45,4 +45,7 @@ export class CostoPage {
       console.log(usuario.email);
     });
   }
+  main() {
+    this.router.navigate(['main']);
+  }
 }

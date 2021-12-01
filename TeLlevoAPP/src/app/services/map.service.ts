@@ -11,7 +11,10 @@ export class MapService {
 
   async initMap(lat: number, lng: number, id: string) {
     const map = await new google.maps.Map(document.getElementById(id), {
-      center: { lat, lng },
+      center: {
+        lat,
+        lng,
+      },
       zoom: 12,
     });
     const marker = new google.maps.Marker({

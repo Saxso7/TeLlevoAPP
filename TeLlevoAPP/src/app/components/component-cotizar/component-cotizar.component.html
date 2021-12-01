@@ -1,28 +1,34 @@
 <ion-content>
-  <ion-list *ngFor="let via of viajes">
-    <ion-card>
-      <ion-card-subtitle class="ion-text-center">Sede: {{via.sede.nombre}}</ion-card-subtitle>
-      <ion-card-subtitle class="ion-text-center">Destino: {{via.comuna.nombre}} </ion-card-subtitle>
-      <ion-card-subtitle class="ion-text-center">Vehiculo: {{via.tipoVehiculo.nombre}}
-      </ion-card-subtitle>
-      <ion-card-subtitle class="ion-text-center">
-        Vehiculo Propio: {{via.vehiculoPropio.Tiene}}
-      </ion-card-subtitle>
-      <ion-card-subtitle class="ion-text-center">
-        Costo : $2000
-      </ion-card-subtitle>
-      <ion-row>
-        <ion-col size="6" class="ion-text-center">
-          <ion-button color="primary">
-            <ion-icon name="checkmark-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col size="6" class="ion-text-center">
-          <ion-button color="danger" (click)="eliminarViajes()">
-            <ion-icon name="trash-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-  </ion-list>
+  <ion-item>
+    <ion-select placeholder="Seleccione una comuna" okText="ok" [(ngModel)]="viajes2" (ionChange)="getViaje()">
+      <ion-select-option *ngFor="let via of viajes" [value]="via">
+        {{via.comuna.nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-card>
+    <ion-card-header class="ion-text-center">Viaje Cotizado</ion-card-header>
+    <ion-card-subtitle class="ion-text-center">Sede : {{sede}} </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Comuna : {{comuna}} </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Costo : ${{costoTotal}}
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">
+      Vehiculo Propio : {{vehiculoP}}
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">
+      Fecha : {{fecha | date: 'medium'}}
+    </ion-card-subtitle>
+    <ion-row>
+      <ion-col size="6" class="ion-text-center">
+        <ion-button color="primary" (click)="viajeConfirmado">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" class="ion-text-center">
+        <ion-button color="danger" (click)="confirmarEliminar()">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>

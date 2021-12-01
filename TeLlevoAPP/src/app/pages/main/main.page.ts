@@ -116,4 +116,7 @@ export class MainPage {
       this.usuarios = usuario.email;
     });
   }
+  setUid() {
+    //this.room.setUid();
+  }
 }

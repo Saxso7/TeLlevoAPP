@@ -15,6 +15,7 @@ export class ConductorComponent implements OnInit {
   vehiculo: any;
   patente: any;
   licencia: any;
+  viajes2 = [];
   constructor(private room: RoomService) {}
 
   ngOnInit() {

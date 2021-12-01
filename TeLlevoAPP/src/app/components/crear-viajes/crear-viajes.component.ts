@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  MenuController,
+  ToastController,
+} from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { MapService } from 'src/app/services/map.service';
 import { RoomService } from 'src/app/services/room.service';
@@ -17,10 +22,15 @@ export class CrearViajesComponent implements OnInit {
   vehP: any;
   tipoVehiculo: any;
   sede: any;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  Comuna: any = [];
   direccion: null;
   usuario: any;
+  conductor: any;
+  latSede: any;
+  longSede: any;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  Conductores = [];
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  Comuna: any = [];
   viajes: any = [];
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Vehiculo: any = [];
@@ -35,6 +45,8 @@ export class CrearViajesComponent implements OnInit {
     private auth: AuthService,
     private activeroute: ActivatedRoute,
     public toastController: ToastController,
+    public alertController: AlertController,
+    public loadingController: LoadingController,
     private router: Router,
     private menu: MenuController
   ) {}
@@ -46,6 +58,7 @@ export class CrearViajesComponent implements OnInit {
     this.llamarVePropio();
     this.llamarVeh();
     this.getCurrentPosition();
+    this.llamarConductor();
   }
   creadorViajes() {
     if (
@@ -95,6 +108,12 @@ export class CrearViajesComponent implements OnInit {
       this.Propia = veP;
     });
   }
+  llamarConductor() {
+    this.room.llamarConductore().subscribe((con) => {
+      console.log(con);
+      this.Conductores = con;
+    });
+  }
   llamarVeh() {
     this.room.llamarVehiculos().subscribe((tipoV) => {
       console.log(tipoV);
@@ -103,8 +122,8 @@ export class CrearViajesComponent implements OnInit {
   }
   async getCurrentPosition() {
     const obCoords = await Geolocation.getCurrentPosition();
-    const lat = obCoords.coords.latitude;
-    const long = obCoords.coords.longitude;
+    const lat = -32.991505;
+    const long = -71.504616;
     this.lat = lat;
     this.long = long;
     console.log(lat, long);
@@ -118,9 +137,49 @@ export class CrearViajesComponent implements OnInit {
   }
   async siguiente() {
     const toast = await this.toastController.create({
-      message: 'Costo generado',
+      message: 'Viaje cotizado',
       duration: 2000,
     });
     toast.present();
+  }
+  async presentAlert1() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Te Llevo APP',
+      message: '¿Confirmar viaje?',
+      buttons: [
+        {
+          text: 'CANCELAR',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          },
+        },
+        {
+          text: 'CONFIRMAR',
+          handler: () => {
+            this.cargar();
+            this.creadorViajes();
+            console.log('Confirm Okay');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  async cargar() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Espere por favor...',
+      duration: 1000,
+      spinner: 'crescent',
+    });
+    await loading.present();
   }
 }
