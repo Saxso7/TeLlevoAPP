@@ -83,6 +83,7 @@ export class MainPage {
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit() {
     this.getCurrentPosition();
+    this.getUsuario();
   }
   async getCurrentPosition() {
     const obCoords = await Geolocation.getCurrentPosition();
@@ -102,8 +103,5 @@ export class MainPage {
     this.auth.getAuth().subscribe((usuario) => {
       this.usuarios = usuario.email;
     });
-  }
-  setUid() {
-    //this.room.setUid();
   }
 }
