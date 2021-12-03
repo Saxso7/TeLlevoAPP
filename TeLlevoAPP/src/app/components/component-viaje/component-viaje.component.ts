@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../../services/map.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { StorageService } from '../../services/storage.service';
 import { componentFactoryName } from '@angular/compiler';
 
 @Component({
@@ -14,7 +13,7 @@ export class ComponentViajeComponent implements OnInit {
   Viaje: any;
   locationss = [];
   locations = [];
-  constructor(private map: MapService, private storage: StorageService) {}
+  constructor(private map: MapService) {}
   ngOnInit() {}
   ionViewDidLoad() {}
   presentAlert() {}

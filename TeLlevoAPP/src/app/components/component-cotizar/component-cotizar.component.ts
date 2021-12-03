@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { RoomService } from 'src/app/services/room.service';
-import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,12 +27,11 @@ export class ComponentCotizarComponent implements OnInit {
   km: any;
   viajes = [];
   viajes2: any;
+  usuario: any;
   constructor(
-    private storage: StorageService,
     private room: RoomService,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    private db: AngularFirestore,
     private router: Router
   ) {}
 
@@ -81,10 +79,18 @@ export class ComponentCotizarComponent implements OnInit {
     // eslint-disable-next-line prefer-const
     let dis = 12742 * Math.asin(Math.sqrt(a));
 
-    return Math.fround(dis);
+    return Math.round(dis);
   }
   crearViajeConfirmado() {
-    this.room.crearViajeConfirmado(this.sede, this.costoTotal, this.km);
+    this.room.crearViajeConfirmado(
+      this.comuna,
+      this.usuario,
+      this.sede,
+      this.km,
+      this.fecha,
+      this.costoTotal,
+      this.tiempo
+    );
   }
   costo() {
     const costoG = 1000;
@@ -103,12 +109,13 @@ export class ComponentCotizarComponent implements OnInit {
       this.latSede,
       this.lat
     );
-    const minutos = this.km / 50;
-    this.tiempo = Math.fround(minutos) + ' horas aproximadas';
+    const minutos = (this.km / 50) * 100;
+    this.tiempo = Math.round(minutos) + ' minutos aproximados';
     console.log(this.tiempo);
     console.log(this.lat, this.latSede, this.km);
   }
   getViaje() {
+    this.usuario = this.viajes2.nombre;
     this.comuna = this.viajes2.comuna.nombre;
     this.sede = this.viajes2.sede.nombre;
     this.lat = this.viajes2.sede.lat;
@@ -139,6 +146,8 @@ export class ComponentCotizarComponent implements OnInit {
         {
           text: 'CONFIRMAR',
           handler: () => {
+            this.crearViajeConfirmado();
+            this.router.navigate(['animacion1']);
             this.cargar();
             console.log('Confirm Okay');
           },

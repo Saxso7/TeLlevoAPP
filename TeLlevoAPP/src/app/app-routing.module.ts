@@ -35,11 +35,6 @@ const routes: Routes = [
     canActivate: [LoginGuard],
   },
   {
-    path: 'splash',
-    loadChildren: () =>
-      import('./pages/splash/splash.module').then((m) => m.SplashPageModule),
-  },
-  {
     path: 'splash2',
     loadChildren: () =>
       import('./pages/splash2/splash2.module').then((m) => m.Splash2PageModule),
@@ -63,6 +58,22 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/main-conductor/main-conductor.module').then(
         (m) => m.MainConductorPageModule
+      ),
+    canActivate: [LoginGuard],
+  },
+  {
+    path: 'animacion1',
+    loadChildren: () =>
+      import('./pages/animacion1/animacion1.module').then(
+        (m) => m.Animacion1PageModule
+      ),
+    canActivate: [LoginGuard],
+  },
+  {
+    path: 'animacion2',
+    loadChildren: () =>
+      import('./pages/animacion2/animacion2.module').then(
+        (m) => m.Animacion2PageModule
       ),
     canActivate: [LoginGuard],
   },

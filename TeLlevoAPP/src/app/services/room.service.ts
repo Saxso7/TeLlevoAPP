@@ -35,6 +35,8 @@ export class RoomService {
   DBcon = this.database.collection('Conductores');
   // eslint-disable-next-line @typescript-eslint/naming-convention
   DBvCon = this.database.collection('ViajeConfirmado');
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  DBvRea = this.database.collection('ViajeRealizado');
 
   llamarViajes() {
     return this.DBRef.snapshotChanges().pipe(
@@ -94,11 +96,48 @@ export class RoomService {
       })
       .catch((err) => console.log(err.message));
   }
-  crearViajeConfirmado(conductor: any, sede: any, km: any) {
+  async crearViajeRealizado(
+    conductor: any,
+    comuna: any,
+    usuario: any,
+    sede: any,
+    km: any,
+    fecha: any,
+    costo: any,
+    tiempo: any
+  ) {
+    try {
+      return await this.DBvRea.add({
+        conductor: conductor,
+        comuna: comuna,
+        usuario: usuario,
+        sede: sede,
+        km: km,
+        fecha: fecha,
+        costo: costo,
+        tiempo: tiempo,
+      });
+    } catch (error) {
+      console.log('error en ', error);
+    }
+  }
+  crearViajeConfirmado(
+    comuna: any,
+    usuario: any,
+    sede: any,
+    km: any,
+    fecha: any,
+    costo: any,
+    tiempo: any
+  ) {
     this.DBvCon.add({
-      conductor: conductor,
+      comuna: comuna,
+      usuario: usuario,
       sede: sede,
       km: km,
+      fecha: fecha,
+      costo: costo,
+      tiempo: tiempo,
     })
       .then(() => {
         console.log('Viaje  creado  correctamente');

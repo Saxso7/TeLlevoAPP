@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { MainConductorPageRoutingModule } from './main-conductor-routing.module';
 
 import { MainConductorPage } from './main-conductor.page';
-import { MapaComponent } from '../../components/mapa/mapa.component';
-import { CrearViajesComponent } from '../../components/crear-viajes/crear-viajes.component';
 import { ViajeConfirmadoComponent } from '../../components/viaje-confirmado/viaje-confirmado.component';
 
 @NgModule({
@@ -18,6 +16,6 @@ import { ViajeConfirmadoComponent } from '../../components/viaje-confirmado/viaj
     IonicModule,
     MainConductorPageRoutingModule,
   ],
-  declarations: [MainConductorPage, MapaComponent, ViajeConfirmadoComponent],
+  declarations: [MainConductorPage, ViajeConfirmadoComponent],
 })
 export class MainConductorPageModule {}

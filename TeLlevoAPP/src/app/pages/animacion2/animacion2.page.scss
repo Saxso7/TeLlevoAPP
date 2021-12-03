@@ -1,0 +1,30 @@
+ion-content {
+  --background: white;
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+  }
+}
+.container {
+  -webkit-animation: slide-right 3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    infinite alternate-reverse forwards;
+  animation: slide-right 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite
+    alternate-reverse forwards;
+}

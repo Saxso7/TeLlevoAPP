@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MapaComponent } from './mapa.component';
+import { Animacion2Page } from './animacion2.page';
 
-describe('MapaComponent', () => {
-  let component: MapaComponent;
-  let fixture: ComponentFixture<MapaComponent>;
+describe('Animacion2Page', () => {
+  let component: Animacion2Page;
+  let fixture: ComponentFixture<Animacion2Page>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapaComponent ],
+      declarations: [ Animacion2Page ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MapaComponent);
+    fixture = TestBed.createComponent(Animacion2Page);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

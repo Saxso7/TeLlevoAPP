@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapService } from 'src/app/services/map.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-conductor',
@@ -8,16 +9,32 @@ import { MapService } from 'src/app/services/map.service';
   styleUrls: ['./main-conductor.page.scss'],
 })
 export class MainConductorPage implements OnInit {
-  constructor(private router: Router, private map: MapService) {
-    this.router.navigate(['main-conductor/mapa']);
+  usuarios: string;
+  constructor(
+    private router: Router,
+    private map: MapService,
+    private auth: AuthService
+  ) {
+    this.router.navigate(['main-conductor/viaje']);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUsuario();
+  }
 
   segmentChanged($event) {
     console.log($event);
     // eslint-disable-next-line prefer-const
     let direccion = $event.detail.value;
     this.router.navigate(['main-conductor/' + direccion]);
+  }
+  logOut() {
+    this.auth.logout();
+    this.router.navigate(['/home']);
+  }
+  getUsuario() {
+    this.auth.getAuth().subscribe((usuario) => {
+      this.usuarios = usuario.email;
+    });
   }
 }

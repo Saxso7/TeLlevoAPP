@@ -1,3 +1,33 @@
-<p>
-  viaje-confirmado works!
-</p>
+<ion-content>
+  <ion-item>
+    <ion-select placeholder="Seleccione un viaje a realizar" okText="ok" [(ngModel)]="viajesConfirmado"
+      (ionChange)="getViajeConfirmado()">
+      <ion-select-option *ngFor="let via of viajesConfirmados" [value]="via">
+        {{via.comuna}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-card>
+    <ion-card-header class="ion-text-center">Viaje Recibido</ion-card-header>
+    <ion-card-subtitle class="ion-text-center">Usuario : {{usuario}}
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Sede : {{sede}} </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Comuna : {{comuna}} </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Costo : ${{costoTotal}}
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">
+      Fecha : {{fecha | date: 'medium'}}
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Distancia aproximada : {{distancia}} Kilometros
+    </ion-card-subtitle>
+    <ion-card-subtitle class="ion-text-center">Tiempo aproximado : {{tiempo}}
+    </ion-card-subtitle>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="primary" (click)="viajeRealizar()">Confirmar
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

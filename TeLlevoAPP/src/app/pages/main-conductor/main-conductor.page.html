@@ -1,16 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>main-conductor</ion-title>
+<ion-header color="primary">
+  <ion-toolbar color="primary">
+    <ion-title color="light" class="ion-text-center">CONDUCTOR</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label class="ion-text-center" color="primary">
+      {{usuarios}}
+    </ion-label>
+    <ion-icon (click)="logOut()" name="log-out-outline"></ion-icon>
+  </ion-item>
   <ion-segment (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="mapa">
-      <ion-label>Conductores</ion-label>
-    </ion-segment-button>
     <ion-segment-button value="viaje">
-      <ion-label>Crear Viaje</ion-label>
+      <ion-label>Viajes Confirmados</ion-label>
     </ion-segment-button>
   </ion-segment>
   <ion-content>

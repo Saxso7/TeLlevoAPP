@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   AlertController,
   LoadingController,
-  MenuController,
   ToastController,
 } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
@@ -43,12 +42,10 @@ export class CrearViajesComponent implements OnInit {
     private map: MapService,
     private room: RoomService,
     private auth: AuthService,
-    private activeroute: ActivatedRoute,
     public toastController: ToastController,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    private router: Router,
-    private menu: MenuController
+    private router: Router
   ) {}
 
   ngOnInit() {
