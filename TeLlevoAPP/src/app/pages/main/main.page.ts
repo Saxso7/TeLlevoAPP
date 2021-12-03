@@ -27,7 +27,7 @@ export class MainPage {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     private auth: AuthService
   ) {
-    this.router.navigate(['main/viaje']);
+    this.router.navigate(['main/cotizar']);
   }
   toggleMenu() {
     this.menu.open();

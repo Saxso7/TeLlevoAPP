@@ -21,7 +21,7 @@ export class CostoPage {
     private menu: MenuController,
     private auth: AuthService
   ) {
-    this.router.navigate(['costo/conductor']);
+    this.router.navigate(['costo/crear']);
   }
   ngOnInit(): void {
     this.llamarUsuario();
