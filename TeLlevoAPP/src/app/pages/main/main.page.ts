@@ -27,10 +27,7 @@ export class MainPage {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     private auth: AuthService
   ) {
-    this.router.navigate(['main/cotizar']);
-  }
-  toggleMenu() {
-    this.menu.open();
+    this.router.navigate(['main/viaje']);
   }
   confirmar() {
     this.presentToast(
@@ -73,7 +70,7 @@ export class MainPage {
     console.log('onDidDismiss resolved with role', role);
   }
   costo() {
-    this.router.navigate(['/splash2']);
+    this.router.navigate(['/costo']);
   }
   segmentChanged($event) {
     console.log($event);

@@ -3,25 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  firebase: {
-    projectId: 'tellevoapp-1',
-    appId: '1:744094337550:web:01410ea821ce3f2ea70a5f',
-    storageBucket: 'tellevoapp-1.appspot.com',
-    locationId: 'southamerica-east1',
-    apiKey: 'AIzaSyCAwST4yxDinH_nu-EUhQ8CTs9YNDL-pWE',
-    authDomain: 'tellevoapp-1.firebaseapp.com',
-    messagingSenderId: '744094337550',
-    measurementId: 'G-6RG3E7E3Y5',
-  },
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyCAwST4yxDinH_nu-EUhQ8CTs9YNDL-pWE',
-    authDomain: 'tellevoapp-1.firebaseapp.com',
-    projectId: 'tellevoapp-1',
-    storageBucket: 'tellevoapp-1.appspot.com',
-    messagingSenderId: '744094337550',
-    appId: '1:744094337550:web:01410ea821ce3f2ea70a5f',
-    measurementId: 'G-6RG3E7E3Y5',
+    apiKey: 'AIzaSyDtO8KmTYWi4khAl6ajB1ygwpklrlRo9CI',
+    authDomain: 'tellevoapp2-f1357.firebaseapp.com',
+    projectId: 'tellevoapp2-f1357',
+    storageBucket: 'tellevoapp2-f1357.appspot.com',
+    messagingSenderId: '949841296659',
+    appId: '1:949841296659:web:e61edfdb44c690bfca6ee6',
   },
 };
 

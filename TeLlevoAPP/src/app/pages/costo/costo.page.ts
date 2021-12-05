@@ -26,9 +26,6 @@ export class CostoPage {
   ngOnInit(): void {
     this.llamarUsuario();
   }
-  toggleMenu() {
-    this.menu.open();
-  }
 
   segmentChanged($event) {
     console.log($event);

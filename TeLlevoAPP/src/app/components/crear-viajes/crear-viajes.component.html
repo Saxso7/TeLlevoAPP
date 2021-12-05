@@ -1,7 +1,7 @@
 <ion-content>
   <ion-item>
-    <ion-select placeholder="Seleccione una comuna" [(ngModel)]="direccion">
-      <ion-select-option *ngFor="let com of Comuna" [value]="com">{{com.nombre}}
+    <ion-select placeholder="Seleccione una Direccion Guardada" [(ngModel)]="direccion">
+      <ion-select-option *ngFor="let com of direccionesGuardada" [value]="com">{{com.nombre}}
       </ion-select-option>
     </ion-select>
   </ion-item>

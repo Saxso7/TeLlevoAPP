@@ -21,7 +21,7 @@ export class CrearViajesComponent implements OnInit {
   vehP: any;
   tipoVehiculo: any;
   sede: any;
-  direccion: null;
+  direccion: any;
   usuario: any;
   conductor: any;
   latSede: any;
@@ -29,7 +29,7 @@ export class CrearViajesComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Conductores = [];
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  Comuna: any = [];
+  direccionesGuardada: any = [];
   viajes: any = [];
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Vehiculo: any = [];
@@ -54,7 +54,6 @@ export class CrearViajesComponent implements OnInit {
     this.llamarSedes();
     this.llamarVePropio();
     this.llamarVeh();
-    this.getCurrentPosition();
     this.llamarConductor();
   }
   creadorViajes() {
@@ -67,6 +66,8 @@ export class CrearViajesComponent implements OnInit {
       console.log('error');
       this.error();
     } else {
+      this.lat = this.direccion.lat;
+      this.long = this.direccion.long;
       this.room.crearViajes(
         this.lat,
         this.long,
@@ -88,9 +89,9 @@ export class CrearViajesComponent implements OnInit {
     });
   }
   llamarComuna() {
-    this.room.llamarMenuViajes().subscribe((comuna) => {
-      console.log(comuna);
-      this.Comuna = comuna;
+    this.room.llamarMenuViajes().subscribe((direccion) => {
+      console.log(direccion);
+      this.direccionesGuardada = direccion;
     });
   }
   llamarSedes() {
@@ -116,14 +117,6 @@ export class CrearViajesComponent implements OnInit {
       console.log(tipoV);
       this.Vehiculo = tipoV;
     });
-  }
-  async getCurrentPosition() {
-    const obCoords = await Geolocation.getCurrentPosition();
-    const lat = -32.991505;
-    const long = -71.504616;
-    this.lat = lat;
-    this.long = long;
-    console.log(lat, long);
   }
   async error() {
     const toast = await this.toastController.create({

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./component-cotizar.component.scss'],
 })
 export class ComponentCotizarComponent implements OnInit {
+  costoKm = 300;
   fecha: any;
   lat: any;
   long: any;
@@ -93,11 +94,16 @@ export class ComponentCotizarComponent implements OnInit {
     );
   }
   costo() {
-    const costoG = 1000;
+    const costoG = this.km * this.costoKm;
     if (this.viajes2.vehiculoPropio.Tiene === 'Si') {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       this.costoTotal = costoG + 1000;
       console.log('Costo creado', this.costoTotal);
+      if (this.costoTotal > 2000) {
+        this.costoTotal = 2000;
+      }
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       this.costoTotal = costoG;
       console.log(this.costoTotal);
     }
@@ -109,7 +115,7 @@ export class ComponentCotizarComponent implements OnInit {
       this.latSede,
       this.lat
     );
-    const minutos = (this.km / 50) * 100;
+    const minutos = (this.km / 30) * 100;
     this.tiempo = Math.round(minutos) + ' minutos aproximados';
     console.log(this.tiempo);
     console.log(this.lat, this.latSede, this.km);
@@ -126,8 +132,8 @@ export class ComponentCotizarComponent implements OnInit {
     this.id = this.viajes2.id;
     this.fecha = this.viajes2.fecha.toDate();
     /*this.room.crearViajeConfirmado(this.lat, this.sede, this.km);*/
-    this.costo();
     this.calcularDistanciaTiempo();
+    this.costo();
   }
   async viajeConfirmado() {
     const alert = await this.alertController.create({
